@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vadla Akhil Chary | Data Vedhi Member</title>
+    <link rel="stylesheet" href="modal.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --text-light: #f8fafc;
+            --text-dark: #1e293b;
+            --bg-dark: #0f172a;
+            --bg-light: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: var(--bg-light);
+            --text-primary: var(--text-dark);
+            --navbar-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: var(--bg-dark);
+            --text-primary: var(--text-light);
+            --navbar-bg: rgba(15, 23, 42, 0.9);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        [data-theme="dark"] .bg-animation {
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #475569);
+            background-size: 400% 400%;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: var(--navbar-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .theme-toggle {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            color: var(--text-primary);
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero-role {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease-out 0.8s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Skills Section */
+        .skills-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            background: var(--glass-bg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            opacity: 0.8;
+        }
+
+        .project-status {
+            display: flex;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.live {
+            background: #10b981;
+            color: white;
+        }
+
+        .status-badge.complete {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .status-badge.wip {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .status-badge.planned {
+            background: #6b7280;
+            color: white;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-primary);
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .project-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .project-link.secondary {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+        }
+
+        .project-link.secondary:hover {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .project-link.disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .project-link.disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .project-link span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .hero {
+                padding: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            opacity: 0.7;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <!-- Background Animation -->
+    <div class="bg-animation"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">Data Vedhi</div>
+            <button class="theme-toggle" id="themeToggle">
+                🌙 Toggle Theme
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome To MY Portfolio</h1>
+            <!-- <h4 class="hero-title">My Self Am Vadla Akhil Chary </h4> -->
+            <div class="hero-role">Data Science Enthusiast & Web Developer</div>
+            <div class="hero-tagline">Transforming Data into Insights, Code into Solutions</div>
+            <p class="hero-description">
+                Passionate to be a member of Data Vedhi, exploring the fascinating world of data science, 
+                machine learning, and web development. I believe in leveraging technology to solve 
+                real-world problems and create meaningful impact through innovative solutions.
+            </p>
+            <div class="cta-buttons">
+                <a href="#skills" class="btn btn-primary">Explore My Skills</a>
+                <a href="#projects" class="btn btn-secondary">View Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <h2 class="section-title">My Expertise</h2>
+        <p class="section-subtitle">Technologies and skills I'm passionate about</p>
+        
+        <div class="skills-grid">
+            <div class="skill-card">
+                <span class="skill-icon">🐍</span>
+                <h3>Python & Data Science</h3>
+                <p>NumPy, Pandas, Scikit-learn, TensorFlow, and data visualization with Matplotlib & Seaborn</p>
+            </div>
+            
+            <div class="skill-card">
+                <span class="skill-icon">🌐</span>
+                <h3>Web Development</h3>
+                <p>HTML5, CSS3, JavaScript, React.js, and responsive design principles</p>
+            </div>
+            
+            <div class="skill-card">
+                <span class="skill-icon">📊</span>
+                <h3>Machine Learning</h3>
+                <p>Supervised & unsupervised learning, neural networks, and predictive modeling</p>
+            </div>
+            
+            <div class="skill-card">
+                <span class="skill-icon">🛢️</span>
+                <h3>Database & APIs</h3>
+                <p>SQL, MongoDB, REST APIs, and data pipeline development</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <h2 class="section-title">My Projects</h2>
+        <p class="section-subtitle">Showcasing my technical skills through real-world applications</p>
+        
+        <div class="projects-grid">
+            <div class="project-card" data-project="landing">
+                <div class="project-header">
+                    <span class="project-icon">🚀</span>
+                    <div class="project-status">
+                        <span class="status-badge live">Live</span>
+                    </div>
+                </div>
+                <h3>Advanced Landing Page</h3>
+                <p class="project-description">
+                    Modern responsive landing page with glassmorphism design, dark/light mode toggle, 
+                    animated particles, and smooth interactions. Built with pure HTML, CSS, and JavaScript.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Animations</span>
+                </div>
+                <div class="project-links">
+                    <a href="landing-page.html" target="_blank" class="project-link">
+                        <span>🔗 View Live</span>
+                    </a>
+                    <a href="#" class="project-link secondary">
+                        <span>📁 Source Code</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card" data-project="feedback">
+                <div class="project-header">
+                    <span class="project-icon">📝</span>
+                    <div class="project-status">
+                        <span class="status-badge live">Live</span>
+                    </div>
+                </div>
+                <h3>Interactive Feedback System</h3>
+                <p class="project-description">
+                    Comprehensive feedback form with real-time validation, star ratings, progress tracking, 
+                    and JSON data storage. Features modern UI with smooth animations.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">JSON</span>
+                </div>
+                <div class="project-links">
+                    <a href="feedback-form.html" target="_blank" class="project-link">
+                        <span>🔗 View Live</span>
+                    </a>
+                    <a href="#" class="project-link secondary">
+                        <span>📁 Source Code</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card" data-project="algorithm">
+                <div class="project-header">
+                    <span class="project-icon">🧮</span>
+                    <div class="project-status">
+                        <span class="status-badge complete">Complete</span>
+                    </div>
+                </div>
+                <h3>Algorithm Solutions</h3>
+                <p class="project-description">
+                    Advanced algorithmic solutions including multiple approaches for finding second largest number. 
+                    Features comprehensive testing, performance analysis, and optimization techniques.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Algorithms</span>
+                    <span class="tech-tag">Testing</span>
+                    <span class="tech-tag">Optimization</span>
+                </div>
+                <div class="project-links">
+                    <a href="second-largest-solution.py" target="_blank" class="project-link">
+                        <span>🐍 View Code</span>
+                    </a>
+                    <a href="#" class="project-link secondary">
+                        <span>📊 Performance</span>
+                    </a>
+                </div>
+            </div>
+
+          <div class="project-card" data-project="cheatsheet">
+    <div class="project-header">
+        <span class="project-icon">📚</span>
+        <div class="project-status">
+            <span class="status-badge complete">Complete</span>
+        </div>
+    </div>
+    <h3>Python Data Science Cheat Sheet</h3>
+    <p class="project-description">
+        Comprehensive learning documentation covering NumPy, Pandas, Matplotlib, and Scikit-learn. 
+        Personal journey with practical examples and best practices.
+    </p>
+    <div class="project-tech">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">NumPy</span>
+        <span class="tech-tag">Pandas</span>
+        <span class="tech-tag">Scikit-learn</span>
+    </div>
+    <div class="project-links">
+        <a href="python-cheat-sheet.pdf" target="_blank" class="project-link">
+            <span>📄 View PDF</span>
+        </a>
+        <a href="#" onclick="downloadCheatSheet()" class="project-link secondary">
+            <span>💾 Download</span>
+        </a>
+    </div>
+</div>
+                </div>
+                <h3>Python Data Science Cheat Sheet</h3>
+                <p class="project-description">
+                    Comprehensive learning documentation covering NumPy, Pandas, Matplotlib, and Scikit-learn. 
+                    Personal journey with practical examples and best practices.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">NumPy</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">Scikit-learn</span>
+                </div>
+                <div class="project-links">
+                    <a href="python-cheat-sheet.pdf" target="_blank" class="project-link">
+                        <span>📄 View PDF</span>
+                    </a>
+                    <a href="#" class="project-link secondary">
+                        <span>📝 Documentation</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Add Your Personal Projects Here -->
+            <div class="project-card" data-project="personal">
+                <div class="project-header">
+                    <span class="project-icon">🔮</span>
+                    <div class="project-status">
+                        <span class="status-badge wip">In Progress</span>
+                    </div>
+                </div>
+                <h3>Your Personal Project</h3>
+                <p class="project-description">
+                    Add description of your personal project here. This could be a web app, data analysis project, 
+                    mobile app, or any other project you're working on.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Technology 1</span>
+                    <span class="tech-tag">Technology 2</span>
+                    <span class="tech-tag">Technology 3</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link">
+                        <span>🔗 View Project</span>
+                    </a>
+                    <a href="#" class="project-link secondary">
+                        <span>⚡ GitHub</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card" data-project="future">
+                <div class="project-header">
+                    <span class="project-icon">🚀</span>
+                    <div class="project-status">
+                        <span class="status-badge planned">Planned</span>
+                    </div>
+                </div>
+                <h3>Future Project Ideas</h3>
+                <p class="project-description">
+                    Upcoming projects I'm planning to build: Student management system, Weather analysis dashboard, 
+                    Movie recommendation engine, or E-commerce analytics platform.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Machine Learning</span>
+                    <span class="tech-tag">APIs</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link disabled">
+                        <span>🔜 Coming Soon</span>
+                    </a>
+                    <a href="#" class="project-link secondary">
+                        <span>💡 Ideas</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="main.js"></script>
+</body>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-nav">
+            <a href="home.html" class="footer-link">🏠 Home</a>
+            <a href="data-vedhi-submission.html" class="footer-link">📋 Submission</a>
+            <a href="feedback-form.html" class="footer-link">📝 Feedback</a>
+        </div>
+        <p class="footer-text">Created for Data Vedhi Club | Your Name</p>
+    </div>
+</footer>
+</html>

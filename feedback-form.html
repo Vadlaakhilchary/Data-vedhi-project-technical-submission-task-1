@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Vedhi - Feedback Form</title>
+    <style>
+        /* Minimal CSS as per requirements */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-container {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .radio-item,
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 5px;
+            margin-top: 0.5rem;
+        }
+
+        .star {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #ffd700;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .json-output {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .json-output pre {
+            margin: 0;
+            white-space: pre-wrap;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+            }
+
+            .header {
+                padding: 1.5rem 1rem;
+            }
+
+            .form-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .radio-group,
+            .checkbox-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <body>
+    <!-- Navigation Bar -->
+    <nav style="background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); padding: 1rem 2rem; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.1);">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 1.2rem; font-weight: bold; color: #667eea;">
+                <a href="home.html" style="text-decoration: none; color: inherit;">Data Vedhi</a>
+            </div>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <a href="home.html" style="color: #333; text-decoration: none; padding: 0.5rem 1rem; border-radius: 20px; background: rgba(0,0,0,0.05); transition: all 0.3s ease;" onmouseover="this.style.background='#667eea'; this.style.color='white';" onmouseout="this.style.background='rgba(0,0,0,0.05)'; this.style.color='#333';">
+                    🏠 Back to Home
+                </a>
+                <a href="data-vedhi-submission.html" style="color: #333; text-decoration: none; padding: 0.5rem 1rem; border-radius: 20px; background: rgba(0,0,0,0.05); transition: all 0.3s ease;" onmouseover="this.style.background='#667eea'; this.style.color='white';" onmouseout="this.style.background='rgba(0,0,0,0.05)'; this.style.color='#333';">
+                    📋 My Submission
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Your existing container div continues here -->
+    <div class="container">
+        <!-- rest of your feedback form content -->
+    <div class="container">
+        <div class="header">
+            <h1>📝 Data Vedhi Feedback Form</h1>
+            <p>Help us improve our club activities and events</p>
+        </div>
+
+        <div class="form-container">
+            <div class="success-message" id="successMessage">
+                ✅ Thank you! Your feedback has been submitted and saved to JSON file.
+            </div>
+
+            <form id="feedbackForm">
+                <!-- Personal Details -->
+                <div class="form-group">
+                    <label for="name">Full Name <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="studentId">Student ID</label>
+                    <input type="text" id="studentId" name="studentId">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <!-- Event Details -->
+                <div class="form-group">
+                    <label for="eventType">Which Data Vedhi activity? <span class="required">*</span></label>
+                    <select id="eventType" name="eventType" required>
+                        <option value="">Select activity</option>
+                        <option value="workshop">Technical Workshop</option>
+                        <option value="seminar">Guest Seminar</option>
+                        <option value="hackathon">Hackathon</option>
+                        <option value="meeting">Club Meeting</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventName">Event/Activity Name</label>
+                    <input type="text" id="eventName" name="eventName" placeholder="e.g., Machine Learning Workshop">
+                </div>
+
+                <!-- Rating -->
+                <div class="form-group">
+                    <label>Overall Experience Rating <span class="required">*</span></label>
+                    <div class="star-rating">
+                        <span class="star" data-rating="1">⭐</span>
+                        <span class="star" data-rating="2">⭐</span>
+                        <span class="star" data-rating="3">⭐</span>
+                        <span class="star" data-rating="4">⭐</span>
+                        <span class="star" data-rating="5">⭐</span>
+                    </div>
+                    <input type="hidden" id="rating" name="rating" required>
+                </div>
+
+                <!-- Feedback -->
+                <div class="form-group">
+                    <label for="liked">What did you like most? <span class="required">*</span></label>
+                    <textarea id="liked" name="liked" placeholder="Share what you enjoyed..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="improvements">What could be improved?</label>
+                    <textarea id="improvements" name="improvements" placeholder="Your suggestions..."></textarea>
+                </div>
+
+                <!-- Recommendation -->
+                <div class="form-group">
+                    <label>Would you recommend Data Vedhi to others? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="rec-yes" name="recommend" value="yes" required>
+                            <label for="rec-yes">Yes, definitely</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="rec-maybe" name="recommend" value="maybe" required>
+                            <label for="rec-maybe">Maybe</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="rec-no" name="recommend" value="no" required>
+                            <label for="rec-no">Probably not</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Future Topics -->
+                <div class="form-group">
+                    <label for="futureTopics">Topics for future activities?</label>
+                    <textarea id="futureTopics" name="futureTopics" placeholder="Suggest topics..."></textarea>
+                </div>
+
+                <!-- Additional Comments -->
+                <div class="form-group">
+                    <label for="comments">Additional Comments</label>
+                    <textarea id="comments" name="comments" placeholder="Any other feedback..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Feedback 📤</button>
+            </form>
+
+            <!-- JSON Output Display -->
+            <div class="json-output" id="jsonOutput">
+                <h3>📄 Feedback Data (JSON Format):</h3>
+                <pre id="jsonData"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form elements
+        const form = document.getElementById('feedbackForm');
+        const successMessage = document.getElementById('successMessage');
+        const jsonOutput = document.getElementById('jsonOutput');
+        const jsonData = document.getElementById('jsonData');
+
+        // Star rating functionality
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('rating');
+
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                const rating = index + 1;
+                ratingInput.value = rating;
+                
+                // Update star display
+                stars.forEach((s, i) => {
+                    if (i < rating) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+
+            // Hover effect
+            star.addEventListener('mouseover', () => {
+                stars.forEach((s, i) => {
+                    if (i <= index) {
+                        s.style.color = '#ffd700';
+                    } else {
+                        s.style.color = '#ddd';
+                    }
+                });
+            });
+
+            star.addEventListener('mouseleave', () => {
+                stars.forEach((s, i) => {
+                    if (i < parseInt(ratingInput.value || 0)) {
+                        s.style.color = '#ffd700';
+                    } else {
+                        s.style.color = '#ddd';
+                    }
+                });
+            });
+        });
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(form);
+            
+            // Create JSON object
+            const feedbackData = {
+                timestamp: new Date().toISOString(),
+                personalInfo: {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    studentId: formData.get('studentId') || null,
+                    phone: formData.get('phone') || null
+                },
+                eventInfo: {
+                    eventType: formData.get('eventType'),
+                    eventName: formData.get('eventName') || null
+                },
+                feedback: {
+                    rating: parseInt(formData.get('rating')),
+                    liked: formData.get('liked'),
+                    improvements: formData.get('improvements') || null,
+                    recommend: formData.get('recommend'),
+                    futureTopics: formData.get('futureTopics') || null,
+                    comments: formData.get('comments') || null
+                },
+                submissionId: 'FB_' + Date.now()
+            };
+
+            // Simulate saving to JSON file (in real backend, this would save to actual file)
+            // For demonstration, we'll use localStorage and display the JSON
+            try {
+                // Get existing feedback or create new array
+                let existingFeedback = JSON.parse(localStorage.getItem('dataVedhiFeedback') || '[]');
+                
+                // Add new feedback
+                existingFeedback.push(feedbackData);
+                
+                // Save back to localStorage (simulating JSON file)
+                localStorage.setItem('dataVedhiFeedback', JSON.stringify(existingFeedback));
+
+                // Show success message
+                successMessage.style.display = 'block';
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+
+                // Display JSON data
+                jsonData.textContent = JSON.stringify(feedbackData, null, 2);
+                jsonOutput.style.display = 'block';
+
+                // Reset form
+                form.reset();
+                ratingInput.value = '';
+                stars.forEach(star => {
+                    star.classList.remove('active');
+                    star.style.color = '#ddd';
+                });
+
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    jsonOutput.style.display = 'none';
+                }, 10000);
+
+                console.log('✅ Feedback saved successfully!');
+                console.log('📊 Total feedback entries:', existingFeedback.length);
+
+            } catch (error) {
+                console.error('❌ Error saving feedback:', error);
+                alert('Error saving feedback. Please try again.');
+            }
+        });
+
+        // Download all feedback as JSON (bonus feature)
+        function downloadFeedbackJSON() {
+            const feedbackData = localStorage.getItem('dataVedhiFeedback');
+            if (feedbackData) {
+                const blob = new Blob([feedbackData], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'data_vedhi_feedback.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } else {
+                alert('No feedback data found!');
+            }
+        }
+
+        // Add download button for admin (if needed)
+        if (window.location.search.includes('admin=true')) {
+            const downloadBtn = document.createElement('button');
+            downloadBtn.textContent = '📥 Download All Feedback (JSON)';
+            downloadBtn.onclick = downloadFeedbackJSON;
+            downloadBtn.style.cssText = `
+                background: #28a745;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-top: 20px;
+                width: 100%;
+            `;
+            document.querySelector('.form-container').appendChild(downloadBtn);
+        }
+
+        console.log('📝 Data Vedhi Feedback Form initialized!');
+        console.log('💡 Add "?admin=true" to URL to see download button');
+    </script>
+</body>
+</html>
